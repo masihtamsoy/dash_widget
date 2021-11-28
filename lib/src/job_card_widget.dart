@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import 'package:flutter_mobx/flutter_mobx.dart';
+
+import '../store/jobs_store.dart'; // Import the JobStore
+
+final _jobStore = JobsStore();
+
 class JobCardWidget extends StatelessWidget {
   const JobCardWidget({Key? key}) : super(key: key);
 
@@ -13,8 +19,8 @@ class JobCardWidget extends StatelessWidget {
             children: [
               ListTile(
                 // leading: Icon(Icons.arrow_drop_down_circle),
-                title: const Text(
-                  "title_holder", // "$title",
+                title: Text(
+                  '${_jobStore.value}', // "$title",
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 subtitle: Column(
@@ -61,7 +67,7 @@ class JobCardWidget extends StatelessWidget {
                 alignment: MainAxisAlignment.end,
                 children: [
                   const Text(
-                    "Test comprises of MCQ and aptitude",
+                    "Test comprises of MCQ and Aptitude",
                     style: TextStyle(fontSize: 10),
                   ),
                   MaterialButton(
@@ -80,7 +86,7 @@ class JobCardWidget extends StatelessWidget {
                       // );
                     },
                     child: const Text(
-                      'Start Test Now',
+                      'Start Test Now!',
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
