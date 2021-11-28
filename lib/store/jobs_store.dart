@@ -9,7 +9,7 @@ class JobsStore = _JobsStore with _$JobsStore;
 // The store-class
 abstract class _JobsStore with Store {
   @observable
-  int value = 0;
+  int value = 2;
 
   @action
   void increment() {

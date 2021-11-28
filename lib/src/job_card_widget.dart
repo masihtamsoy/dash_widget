@@ -5,10 +5,12 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 
 import '../store/jobs_store.dart'; // Import the JobStore
 
-final _jobStore = JobsStore();
+final JobsStore _jobsStore = JobsStore();
 
 class JobCardWidget extends StatelessWidget {
-  const JobCardWidget({Key? key}) : super(key: key);
+  JobCardWidget({Key? key}) : super(key: key);
+
+  late JobsStore _jobsStore;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,7 @@ class JobCardWidget extends StatelessWidget {
               ListTile(
                 // leading: Icon(Icons.arrow_drop_down_circle),
                 title: Text(
-                  '${_jobStore.value}', // "$title",
+                  '${_jobsStore.value}', // "$title",
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 subtitle: Column(
