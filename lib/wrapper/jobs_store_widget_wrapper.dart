@@ -3,35 +3,30 @@ import 'package:dash_widget/src/job_card_widget.dart';
 import 'package:dash_widget/store/jobs_store.dart';
 import 'package:provider/provider.dart';
 
+final JobsStore _jobsStore = JobsStore();
+
 // INFO: Create base classes, for good inheritance practices
 // class JobStoreWidgetWrapper<T, V> extends JobStoreWidgetWrapper<T, V> {
 class JobStoreWidgetWrapper extends StatefulWidget {
-  JobStoreWidgetWrapper({Key? key}) : super(key: key);
+  const JobStoreWidgetWrapper({Key? key}) : super(key: key);
+  // INFO: Pick mobile and company_code from client
+  // mobile
+  // company_code
 
   @override
   _StoreWidgetWrapperState createState() => _StoreWidgetWrapperState();
 }
 
 class _StoreWidgetWrapperState extends State<JobStoreWidgetWrapper> {
-  late JobsStore _jobsStore;
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-
-    // initializing stores
-    _jobsStore = Provider.of<JobsStore>(context);
-
-    // TODO: // check to see if already called api
-    // if (!_jobsStore.loading) {
-    //   _jobsStore.getPosts();
-    // }
+  List<Widget> _listAllJobsWidget() {
+    // Loop over _jobsStore.jobList(mobile, company_code)
+    return [const JobCardWidget(), const JobCardWidget()];
   }
-
-  // final _jobStore = Provider.of<JobsStore>(context);
 
   @override
   Widget build(BuildContext context) {
-    return JobCardWidget();
+    return Column(
+      children: _listAllJobsWidget(),
+    );
   }
 }

@@ -8,9 +8,7 @@ import '../store/jobs_store.dart'; // Import the JobStore
 final JobsStore _jobsStore = JobsStore();
 
 class JobCardWidget extends StatelessWidget {
-  JobCardWidget({Key? key}) : super(key: key);
-
-  late JobsStore _jobsStore;
+  const JobCardWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,8 +17,15 @@ class JobCardWidget extends StatelessWidget {
         child: Card(
           child: Column(
             children: [
+              //INFO: observe state change
+              Observer(
+                  builder: (_) => Text(
+                        '${_jobsStore.value}',
+                        style: const TextStyle(fontSize: 40),
+                      )),
               ListTile(
                 // leading: Icon(Icons.arrow_drop_down_circle),
+                // INFO: observe initial store value
                 title: Text(
                   '${_jobsStore.value}', // "$title",
                   style: TextStyle(fontWeight: FontWeight.bold),
@@ -69,12 +74,14 @@ class JobCardWidget extends StatelessWidget {
                 alignment: MainAxisAlignment.end,
                 children: [
                   const Text(
-                    "Test comprises of MCQ and Aptitude",
+                    "Test comprises of MCQ and Aptitude now",
                     style: TextStyle(fontSize: 10),
                   ),
                   MaterialButton(
                     color: Theme.of(context).primaryColor,
                     onPressed: () {
+                      print("increment");
+                      _jobsStore.increment();
                       // TODO: bring this to life
                       // // maintain state: job_selected
                       // Provider.of<ExamEvaluateModal>(context, listen: false)
