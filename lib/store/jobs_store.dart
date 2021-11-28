@@ -1,7 +1,7 @@
 import 'package:mobx/mobx.dart';
 
 // Include generated file
-part 'JobsStore.g.dart';
+part 'jobs_store.g.dart';
 
 // This is the class used by rest of your codebase
 class JobsStore = _JobsStore with _$JobsStore;

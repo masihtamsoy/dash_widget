@@ -80,7 +80,7 @@ class JobCardWidget extends StatelessWidget {
                       // );
                     },
                     child: const Text(
-                      'Start Test',
+                      'Start Test Now',
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
