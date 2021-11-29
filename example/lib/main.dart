@@ -126,8 +126,11 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Observer(
                 builder: (_) => Text(
+                      '${Provider.of<JobsStore>(context, listen: false).selectedJob} dynamic Jobs store value in example/main',
+                    )),
+            Observer(
+                builder: (_) => Text(
                       '${Provider.of<JobsStore>(context, listen: false).value} dynamic Jobs store value in example/main',
-                      style: const TextStyle(fontSize: 40),
                     )),
           ],
         ),

@@ -11,9 +11,11 @@ class JobCardWidget extends StatelessWidget {
   final String location;
   final String salary;
   final String iconUri;
+  final VoidCallback? onPressed;
 
   const JobCardWidget({
     Key? key,
+    required this.onPressed,
     required this.title,
     required this.companyName,
     this.location = "N.A",
@@ -31,6 +33,9 @@ class JobCardWidget extends StatelessWidget {
           child: Column(
             children: [
               // //INFO: observe state change
+              /// Calls `context.watch` to make [Count] rebuild when [Counter] changes.
+              // '${context.watch<Counter>().count}',
+              /// other way to watch
               // Observer(
               //     builder: (_) => Text(
               //           '${_jobsStore.value}',
@@ -92,21 +97,23 @@ class JobCardWidget extends StatelessWidget {
                   ),
                   MaterialButton(
                     color: Theme.of(context).primaryColor,
-                    onPressed: () {
-                      print("increment");
-                      _jobsStore.increment();
-                      // TODO: bring this to life
-                      // // maintain state: job_selected
-                      // Provider.of<ExamEvaluateModal>(context, listen: false)
-                      //     .job_select(_getJob(index));
+                    onPressed: onPressed,
+                    // onPressed: () {
+                    //   print("increment");
+                    //   _jobsStore.increment();
+                    //   _jobsStore.selectJob(_jobsStore.getJob(index));
+                    //   // TODO: bring this to life
+                    //   // // maintain state: job_selected
+                    //   // Provider.of<ExamEvaluateModal>(context, listen: false)
+                    //   //     .job_select(_getJob(index));
 
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //       builder: (context) =>
-                      //           new QuestionJourney(screenIndex: 0)),
-                      // );
-                    },
+                    //   // Navigator.push(
+                    //   //   context,
+                    //   //   MaterialPageRoute(
+                    //   //       builder: (context) =>
+                    //   //           new QuestionJourney(screenIndex: 0)),
+                    //   // );
+                    // },
                     child: const Text(
                       'Start Test Now!',
                       style: TextStyle(color: Colors.white),

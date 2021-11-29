@@ -9,6 +9,21 @@ part of 'jobs_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$JobsStore on _JobsStore, Store {
+  final _$selectedJobAtom = Atom(name: '_JobsStore.selectedJob');
+
+  @override
+  Map<dynamic, dynamic>? get selectedJob {
+    _$selectedJobAtom.reportRead();
+    return super.selectedJob;
+  }
+
+  @override
+  set selectedJob(Map<dynamic, dynamic>? value) {
+    _$selectedJobAtom.reportWrite(value, super.selectedJob, () {
+      super.selectedJob = value;
+    });
+  }
+
   final _$valueAtom = Atom(name: '_JobsStore.value');
 
   @override
@@ -61,6 +76,17 @@ mixin _$JobsStore on _JobsStore, Store {
   }
 
   @override
+  void selectJob(Map<dynamic, dynamic> job) {
+    final _$actionInfo =
+        _$_JobsStoreActionController.startAction(name: '_JobsStore.selectJob');
+    try {
+      return super.selectJob(job);
+    } finally {
+      _$_JobsStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   int getTotalJobs() {
     final _$actionInfo = _$_JobsStoreActionController.startAction(
         name: '_JobsStore.getTotalJobs');
@@ -85,6 +111,7 @@ mixin _$JobsStore on _JobsStore, Store {
   @override
   String toString() {
     return '''
+selectedJob: ${selectedJob},
 value: ${value},
 jobList: ${jobList}
     ''';

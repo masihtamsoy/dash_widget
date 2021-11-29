@@ -17,6 +17,9 @@ abstract class _JobsStore with Store {
   late String data;
 
   @observable
+  Map? selectedJob;
+
+  @observable
   int value = 2;
 
   // @observable
@@ -24,8 +27,6 @@ abstract class _JobsStore with Store {
 
   @observable
   dynamic jobList;
-
-  @observable
 
   // @observable
   // String? jobsString;
@@ -36,6 +37,11 @@ abstract class _JobsStore with Store {
   }
 
   // // actions:-------------------------------------------------------------------
+  @action
+  void selectJob(Map job) {
+    selectedJob = job;
+  }
+
   @action
   dynamic getJobListing(String mobile, String companyCode) async {
     print("getJobListing >>>>>> $mobile $companyCode");

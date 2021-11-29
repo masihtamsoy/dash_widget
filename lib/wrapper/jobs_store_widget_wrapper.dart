@@ -37,6 +37,12 @@ class _StoreWidgetWrapperState extends State<JobStoreWidgetWrapper> {
     super.didChangeDependencies();
   }
 
+  void _onPressed(int index) {
+    _jobsStore.increment();
+    _jobsStore.selectJob(_jobsStore.getJob(index));
+    // Navigator.of(context).pushReplacementNamed('');
+  }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -70,6 +76,9 @@ class _StoreWidgetWrapperState extends State<JobStoreWidgetWrapper> {
                             location: location,
                             salary: salary,
                             iconUri: iconUri,
+                            onPressed: () {
+                              _onPressed(index);
+                            },
                           );
                         })
               ]);
