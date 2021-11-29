@@ -62,12 +62,14 @@ class _StoreWidgetWrapperState extends State<JobStoreWidgetWrapper> {
                           String location =
                               _jobsStore.getJob(index)['location'];
                           String salary = _jobsStore.getJob(index)['salary'];
+                          String iconUri = _jobsStore.getJob(index)['icon_uri'];
 
                           return JobCardWidget(
                             title: title,
                             companyName: companyName,
                             location: location,
                             salary: salary,
+                            iconUri: iconUri,
                           );
                         })
               ]);

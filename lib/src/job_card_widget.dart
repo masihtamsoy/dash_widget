@@ -10,14 +10,16 @@ class JobCardWidget extends StatelessWidget {
   final String companyName;
   final String location;
   final String salary;
+  final String iconUri;
 
-  const JobCardWidget(
-      {Key? key,
-      required this.title,
-      required this.companyName,
-      this.location = "N.A",
-      this.salary = "N.A"})
-      : super(key: key);
+  const JobCardWidget({
+    Key? key,
+    required this.title,
+    required this.companyName,
+    this.location = "N.A",
+    this.salary = "N.A",
+    this.iconUri = "N.A",
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -61,13 +63,13 @@ class JobCardWidget extends StatelessWidget {
                   ],
                 ),
                 // TODO: reimplement
-                // trailing: SvgPicture.network(
-                //   _getJob(index)['icon_uri'],
-                //   semanticsLabel: 'A shark?!',
-                //   placeholderBuilder: (BuildContext context) => Container(
-                //       padding: const EdgeInsets.all(30.0),
-                //       child: const CircularProgressIndicator()),
-                // ),
+                trailing: SvgPicture.network(
+                  iconUri,
+                  semanticsLabel: 'A shark?!',
+                  placeholderBuilder: (BuildContext context) => Container(
+                      padding: const EdgeInsets.all(30.0),
+                      child: const CircularProgressIndicator()),
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.all(16.0),
