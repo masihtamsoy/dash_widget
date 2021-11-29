@@ -24,6 +24,28 @@ mixin _$JobsStore on _JobsStore, Store {
     });
   }
 
+  final _$jobListAtom = Atom(name: '_JobsStore.jobList');
+
+  @override
+  List<dynamic>? get jobList {
+    _$jobListAtom.reportRead();
+    return super.jobList;
+  }
+
+  @override
+  set jobList(List<dynamic>? value) {
+    _$jobListAtom.reportWrite(value, super.jobList, () {
+      super.jobList = value;
+    });
+  }
+
+  final _$getJobsAsyncAction = AsyncAction('_JobsStore.getJobs');
+
+  @override
+  Future<dynamic> getJobs(String mobile, String companyCode) {
+    return _$getJobsAsyncAction.run(() => super.getJobs(mobile, companyCode));
+  }
+
   final _$_JobsStoreActionController = ActionController(name: '_JobsStore');
 
   @override
@@ -40,7 +62,8 @@ mixin _$JobsStore on _JobsStore, Store {
   @override
   String toString() {
     return '''
-value: ${value}
+value: ${value},
+jobList: ${jobList}
     ''';
   }
 }

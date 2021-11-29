@@ -64,9 +64,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
-  // initialze JobsStore: pass it to dash_widget
-  final JobsStore _jobsStore = JobsStore();
-
   void _incrementCounter() {
     setState(() {
       // This call to setState tells the Flutter framework that something has
@@ -124,12 +121,12 @@ class _MyHomePageState extends State<MyHomePage> {
               'JobsStore value in example/main initial',
             ),
             Text(
-              '${_jobsStore.value}',
+              '${Provider.of<JobsStore>(context, listen: false).value}',
               style: Theme.of(context).textTheme.headline4,
             ),
             Observer(
                 builder: (_) => Text(
-                      '${_jobsStore.value} dynamic Jobs store value in example/main',
+                      '${Provider.of<JobsStore>(context, listen: false).value} dynamic Jobs store value in example/main',
                       style: const TextStyle(fontSize: 40),
                     )),
           ],

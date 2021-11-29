@@ -10,7 +10,7 @@ class JobCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final JobsStore _jobsStore = Provider.of<JobsStore>(context, listen: false);
+    final JobsStore _jobsStore = Provider.of<JobsStore>(context, listen: true);
 
     return Container(
         padding: const EdgeInsets.only(bottom: 8),
