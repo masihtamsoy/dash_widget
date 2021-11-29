@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:provider/provider.dart';
 
 import '../store/jobs_store.dart'; // Import the JobStore
-
-final JobsStore _jobsStore = JobsStore();
 
 class JobCardWidget extends StatelessWidget {
   const JobCardWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final JobsStore _jobsStore = Provider.of<JobsStore>(context, listen: false);
+
     return Container(
         padding: const EdgeInsets.only(bottom: 8),
         child: Card(

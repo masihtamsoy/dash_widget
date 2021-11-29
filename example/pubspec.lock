@@ -77,7 +77,7 @@ packages:
     source: hosted
     version: "1.0.4"
   flutter_mobx:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: flutter_mobx
       url: "https://pub.dartlang.org"
@@ -117,7 +117,7 @@ packages:
     source: hosted
     version: "1.7.0"
   mobx:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: mobx
       url: "https://pub.dartlang.org"
@@ -159,7 +159,7 @@ packages:
     source: hosted
     version: "4.4.0"
   provider:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: provider
       url: "https://pub.dartlang.org"

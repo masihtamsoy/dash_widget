@@ -1,31 +1,44 @@
+import 'package:dash_widget/store/jobs_store.dart';
 import 'package:flutter/material.dart';
 import 'package:dash_widget/dash_widget.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  MyApp({Key? key}) : super(key: key);
+  final JobsStore _jobsStore = JobsStore();
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+    return MultiProvider(
+      providers: [
+        Provider<JobsStore>(create: (_) => _jobsStore),
+      ],
+      child: Observer(
+          name: 'global-observer',
+          builder: (context) {
+            return MaterialApp(
+              title: 'Flutter Demo',
+              theme: ThemeData(
+                // This is the theme of your application.
+                //
+                // Try running your application with "flutter run". You'll see the
+                // application has a blue toolbar. Then, without quitting the app, try
+                // changing the primarySwatch below to Colors.green and then invoke
+                // "hot reload" (press "r" in the console where you ran "flutter run",
+                // or simply save your changes to "hot reload" in a Flutter IDE).
+                // Notice that the counter didn't reset back to zero; the application
+                // is not restarted.
+                primarySwatch: Colors.blue,
+              ),
+              home: const MyHomePage(title: 'Flutter Demo Home Page'),
+            );
+          }),
     );
   }
 }
@@ -50,6 +63,9 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+
+  // initialze JobsStore: pass it to dash_widget
+  final JobsStore _jobsStore = JobsStore();
 
   void _incrementCounter() {
     setState(() {
@@ -96,14 +112,26 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            JobStoreWidgetWrapper(),
+            //INFO: Pass app context or state
+            // Idea is that User can access current state of JobStore
+            // JobStoreWidgetWrapper(clientContext: context),
+            // _nativeJobsStore = dash_widget.store(_jobsStore);
+            // _nativeJobsStore.value
+            // INFO: This strategy does not work JobStoreWidgetWrapper is child?
+            const JobCardWidget(),
+
             const Text(
-              'You have pushed the button this many times:',
+              'JobsStore value in example/main initial',
             ),
             Text(
-              '$_counter',
+              '${_jobsStore.value}',
               style: Theme.of(context).textTheme.headline4,
             ),
+            Observer(
+                builder: (_) => Text(
+                      '${_jobsStore.value} dynamic Jobs store value in example/main',
+                      style: const TextStyle(fontSize: 40),
+                    )),
           ],
         ),
       ),

@@ -20,7 +20,7 @@ class JobStoreWidgetWrapper extends StatefulWidget {
 class _StoreWidgetWrapperState extends State<JobStoreWidgetWrapper> {
   List<Widget> _listAllJobsWidget() {
     // Loop over _jobsStore.jobList(mobile, company_code)
-    return [const JobCardWidget(), const JobCardWidget()];
+    return [const JobCardWidget()];
   }
 
   @override
