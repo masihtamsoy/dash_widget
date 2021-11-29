@@ -4,6 +4,8 @@ import 'package:dash_widget/dash_widget.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 
+import './journey.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -24,6 +26,14 @@ class MyApp extends StatelessWidget {
           builder: (context) {
             return MaterialApp(
               title: 'Flutter Demo',
+              initialRoute: '/',
+              routes: {
+                // When navigating to the "/" route, build the FirstScreen widget.
+                '/': (context) =>
+                    const MyHomePage(title: 'Flutter Demo Home Page'),
+                // When navigating to the "/second" route, build the SecondScreen widget.
+                '/second': (context) => const Journey(),
+              },
               theme: ThemeData(
                 // This is the theme of your application.
                 //
@@ -36,7 +46,7 @@ class MyApp extends StatelessWidget {
                 // is not restarted.
                 primarySwatch: Colors.blue,
               ),
-              home: const MyHomePage(title: 'Flutter Demo Home Page'),
+              // home: const MyHomePage(title: 'Flutter Demo Home Page'),
             );
           }),
     );

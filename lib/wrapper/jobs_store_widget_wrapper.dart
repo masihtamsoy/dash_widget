@@ -40,7 +40,6 @@ class _StoreWidgetWrapperState extends State<JobStoreWidgetWrapper> {
   void _onPressed(int index) {
     _jobsStore.increment();
     _jobsStore.selectJob(_jobsStore.getJob(index));
-    // Navigator.of(context).pushReplacementNamed('');
   }
 
   @override
@@ -78,6 +77,8 @@ class _StoreWidgetWrapperState extends State<JobStoreWidgetWrapper> {
                             iconUri: iconUri,
                             onPressed: () {
                               _onPressed(index);
+
+                              Navigator.pushNamed(context, '/second');
                             },
                           );
                         })
