@@ -6,7 +6,18 @@ import 'package:provider/provider.dart';
 import '../store/jobs_store.dart'; // Import the JobStore
 
 class JobCardWidget extends StatelessWidget {
-  const JobCardWidget({Key? key}) : super(key: key);
+  final String title;
+  final String companyName;
+  final String location;
+  final String salary;
+
+  const JobCardWidget(
+      {Key? key,
+      required this.title,
+      required this.companyName,
+      this.location = "N.A",
+      this.salary = "N.A"})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,33 +28,33 @@ class JobCardWidget extends StatelessWidget {
         child: Card(
           child: Column(
             children: [
-              //INFO: observe state change
-              Observer(
-                  builder: (_) => Text(
-                        '${_jobsStore.value}',
-                        style: const TextStyle(fontSize: 40),
-                      )),
+              // //INFO: observe state change
+              // Observer(
+              //     builder: (_) => Text(
+              //           '${_jobsStore.value}',
+              //           style: const TextStyle(fontSize: 40),
+              //         )),
               ListTile(
                 // leading: Icon(Icons.arrow_drop_down_circle),
                 // INFO: observe initial store value
                 title: Text(
-                  '${_jobsStore.value}', // "$title",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  title, // "$title",
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
                 subtitle: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
-                      children: const [
-                        Icon(Icons.work),
-                        Text("company_name_holder"),
+                      children: [
+                        const Icon(Icons.work),
+                        Text(companyName),
                         // Text('$company_name'),
                       ],
                     ),
                     Row(
-                      children: const [
-                        Icon(Icons.location_city),
-                        Text('location_holder'),
+                      children: [
+                        const Icon(Icons.location_city),
+                        Text(location)
                         // Text('$location'),
                       ],
                     ),
@@ -64,7 +75,7 @@ class JobCardWidget extends StatelessWidget {
                   children: [
                     Icon(Icons.money),
                     Text(
-                      'salary_holder',
+                      salary,
                       style: TextStyle(color: Colors.black.withOpacity(0.6)),
                     ),
                   ],

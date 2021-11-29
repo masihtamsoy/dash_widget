@@ -115,7 +115,7 @@ class _MyHomePageState extends State<MyHomePage> {
             // _nativeJobsStore = dash_widget.store(_jobsStore);
             // _nativeJobsStore.value
             // INFO: This strategy does not work JobStoreWidgetWrapper is child?
-            const JobCardWidget(),
+            const JobStoreWidgetWrapper(),
 
             const Text(
               'JobsStore value in example/main initial',

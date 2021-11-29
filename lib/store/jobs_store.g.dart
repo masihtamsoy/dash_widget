@@ -27,23 +27,24 @@ mixin _$JobsStore on _JobsStore, Store {
   final _$jobListAtom = Atom(name: '_JobsStore.jobList');
 
   @override
-  List<dynamic>? get jobList {
+  dynamic get jobList {
     _$jobListAtom.reportRead();
     return super.jobList;
   }
 
   @override
-  set jobList(List<dynamic>? value) {
+  set jobList(dynamic value) {
     _$jobListAtom.reportWrite(value, super.jobList, () {
       super.jobList = value;
     });
   }
 
-  final _$getJobsAsyncAction = AsyncAction('_JobsStore.getJobs');
+  final _$getJobListingAsyncAction = AsyncAction('_JobsStore.getJobListing');
 
   @override
-  Future<dynamic> getJobs(String mobile, String companyCode) {
-    return _$getJobsAsyncAction.run(() => super.getJobs(mobile, companyCode));
+  Future getJobListing(String mobile, String companyCode) {
+    return _$getJobListingAsyncAction
+        .run(() => super.getJobListing(mobile, companyCode));
   }
 
   final _$_JobsStoreActionController = ActionController(name: '_JobsStore');
@@ -54,6 +55,28 @@ mixin _$JobsStore on _JobsStore, Store {
         _$_JobsStoreActionController.startAction(name: '_JobsStore.increment');
     try {
       return super.increment();
+    } finally {
+      _$_JobsStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  int getTotalJobs() {
+    final _$actionInfo = _$_JobsStoreActionController.startAction(
+        name: '_JobsStore.getTotalJobs');
+    try {
+      return super.getTotalJobs();
+    } finally {
+      _$_JobsStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic getJob(int index) {
+    final _$actionInfo =
+        _$_JobsStoreActionController.startAction(name: '_JobsStore.getJob');
+    try {
+      return super.getJob(index);
     } finally {
       _$_JobsStoreActionController.endAction(_$actionInfo);
     }
