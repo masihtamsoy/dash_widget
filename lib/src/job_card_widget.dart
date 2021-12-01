@@ -3,8 +3,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 
-import '../store/jobs_store.dart'; // Import the JobStore
-
 class JobCardWidget extends StatelessWidget {
   final String title;
   final String companyName;
@@ -25,8 +23,6 @@ class JobCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final JobsStore _jobsStore = Provider.of<JobsStore>(context, listen: true);
-
     return Container(
         padding: const EdgeInsets.only(bottom: 8),
         child: Card(
@@ -98,22 +94,6 @@ class JobCardWidget extends StatelessWidget {
                   MaterialButton(
                     color: Theme.of(context).primaryColor,
                     onPressed: onPressed,
-                    // onPressed: () {
-                    //   print("increment");
-                    //   _jobsStore.increment();
-                    //   _jobsStore.selectJob(_jobsStore.getJob(index));
-                    //   // TODO: bring this to life
-                    //   // // maintain state: job_selected
-                    //   // Provider.of<ExamEvaluateModal>(context, listen: false)
-                    //   //     .job_select(_getJob(index));
-
-                    //   // Navigator.push(
-                    //   //   context,
-                    //   //   MaterialPageRoute(
-                    //   //       builder: (context) =>
-                    //   //           new QuestionJourney(screenIndex: 0)),
-                    //   // );
-                    // },
                     child: const Text(
                       'Start Test Now!',
                       style: TextStyle(color: Colors.white),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dash_widget/src/job_card_widget.dart';
+import 'package:dash_widget/src/simple_card_widget.dart';
 import 'package:dash_widget/store/listing_store.dart';
 import 'package:provider/provider.dart';
 
@@ -59,6 +60,47 @@ class _StoreWidgetWrapperState extends State<ListingUiStoreWizard> {
     feedback();
   }
 
+  Widget _buildPresentation(int index) {
+    switch (widget.mode) {
+      case "job":
+        return _buildJobPresentation(index);
+      default:
+        return _buildApplicantPresentation(index);
+    }
+  }
+
+  Widget _buildApplicantPresentation(int index) {
+    String mobile = _listingStore.getItem(index)['mobile'];
+    String jobId = "1234";
+
+    return SimpleCardWidget(
+      title: mobile,
+      subtitle: jobId,
+    );
+  }
+
+  Widget _buildJobPresentation(int index) {
+    String title = _listingStore.getItem(index)['title'];
+    String companyName = _listingStore.getItem(index)['company_name'];
+    String location = _listingStore.getItem(index)['location'];
+    String salary = _listingStore.getItem(index)['salary'];
+    String iconUri = _listingStore.getItem(index)['icon_uri'];
+
+    return JobCardWidget(
+      title: title,
+      companyName: companyName,
+      location: location,
+      salary: salary,
+      iconUri: iconUri,
+      onPressed: () {
+        Function feedback = () => {};
+        _onPressed(index, feedback);
+
+        Navigator.pushNamed(context, '/second');
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -76,32 +118,11 @@ class _StoreWidgetWrapperState extends State<ListingUiStoreWizard> {
                     : ListView.builder(
                         scrollDirection: Axis.vertical,
                         shrinkWrap: true,
-                        itemCount: _listingStore.totalItems, // the length
+                        // itemCount: _listingStore.totalItems, // the length
+                        itemCount: 2,
                         itemBuilder: (context, index) {
-                          return Text('${_listingStore.getItem(index)}');
-                          // String title = _listingStore.getItem(index)['title'];
-                          // String companyName =
-                          //     _listingStore.getItem(index)['company_name'];
-                          // String location =
-                          //     _listingStore.getItem(index)['location'];
-                          // String salary =
-                          //     _listingStore.getItem(index)['salary'];
-                          // String iconUri =
-                          //     _listingStore.getItem(index)['icon_uri'];
-
-                          // return JobCardWidget(
-                          //   title: title,
-                          //   companyName: companyName,
-                          //   location: location,
-                          //   salary: salary,
-                          //   iconUri: iconUri,
-                          //   onPressed: () {
-                          //     Function feedback = () => {};
-                          //     _onPressed(index, feedback);
-
-                          //     Navigator.pushNamed(context, '/second');
-                          //   },
-                          // );
+                          return _buildPresentation(index);
+                          // return Text('${_listingStore.getItem(index)}');
                         })
               ]);
             }
