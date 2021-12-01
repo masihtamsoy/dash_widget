@@ -14,6 +14,7 @@ void main() {
 class MyApp extends StatelessWidget {
   MyApp({Key? key}) : super(key: key);
   final ListingStore _listingStore = ListingStore();
+  final DashStore _dashStore = DashStore();
 
   // This widget is the root of your application.
   @override
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         Provider<ListingStore>(create: (_) => _listingStore),
+        Provider<DashStore>(create: (_) => _dashStore),
       ],
       child: Observer(
           name: 'global-observer',
@@ -34,6 +36,8 @@ class MyApp extends StatelessWidget {
                     const MyHomePage(title: 'Flutter Demo Home Page'),
                 // When navigating to the "/second" route, build the SecondScreen widget.
                 '/second': (context) => const Journey(),
+                '/application': (context) => const Journey(),
+                '/job': (context) => const Journey(),
               },
               theme: ThemeData(
                 // This is the theme of your application.
@@ -127,9 +131,22 @@ class _MyHomePageState extends State<MyHomePage> {
             // LnativelistingStore.value
             // INFO: This strategy does not work JobStoreWidgetWrapper is child?
             // const JobStoreWidgetWrapper(),
+
             ListingUiStoreWizard(
-                feedback: () =>
+                mode: "application",
+                pushRouteName: '/job',
+                getCallbackStore: () =>
                     Provider.of<DashStore>(context, listen: false).value),
+
+            // ListingUiStoreWizard(
+            //     mode: "job",
+            //     pushRouteName: '/application',
+            //     getCallbackStore: () {
+            //       return Provider.of<DashStore>(context, listen: false);
+            //     }
+            //     // Provider.of<DashStore>(context, listen: false)
+            //     ),
+
             const Text(
               'ListingStore value in example/main initial',
             ),
@@ -141,6 +158,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 builder: (_) => Text(
                       '${Provider.of<ListingStore>(context, listen: false).selectedItem} dynamic Jobs store value in example/main',
                     )),
+            // Observer(
+            //     builder: (_) => Text(
+            //           '${Provider.of<DashStore>(context, listen: false).jobSelected} dynamic Jobs store value in example/main',
+            //         )),
             Observer(
                 builder: (_) => Text(
                       '${Provider.of<ListingStore>(context, listen: false).value} dynamic Jobs store value in example/main',

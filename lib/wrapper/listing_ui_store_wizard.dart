@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:dash_widget/src/job_card_widget.dart';
 import 'package:dash_widget/src/simple_card_widget.dart';
@@ -73,21 +74,19 @@ class _StoreWidgetWrapperState extends State<ListingUiStoreWizard> {
   }
 
   Widget _buildApplicantPresentation(int index) {
-    String mobile = _listingStore.getItem(index)['mobile'];
+    String mobile = _listingStore.getItem(index)['mobile'] ?? "";
     String jobId = "1234";
+    String answers = json.encode(_listingStore.getItem(index)['answers'] ?? {});
 
-    return SimpleCardWidget(
-      title: mobile,
-      subtitle: jobId,
-    );
+    return SimpleCardWidget(title: mobile, subtitle: jobId, answers: answers);
   }
 
   Widget _buildJobPresentation(int index) {
-    String title = _listingStore.getItem(index)['title'];
-    String companyName = _listingStore.getItem(index)['company_name'];
-    String location = _listingStore.getItem(index)['location'];
-    String salary = _listingStore.getItem(index)['salary'];
-    String iconUri = _listingStore.getItem(index)['icon_uri'];
+    String title = _listingStore.getItem(index)['title'] ?? "";
+    String companyName = _listingStore.getItem(index)['company_name'] ?? "";
+    String location = _listingStore.getItem(index)['location'] ?? "";
+    String salary = _listingStore.getItem(index)['salary'] ?? "";
+    String iconUri = _listingStore.getItem(index)['icon_uri'] ?? "";
 
     return JobCardWidget(
       title: title,
@@ -114,19 +113,16 @@ class _StoreWidgetWrapperState extends State<ListingUiStoreWizard> {
             if (snapshot.hasError) {
               return Center(child: Text('Error: ${snapshot.error}'));
             } else {
-              return Column(children: [
-                _listingStore.totalItems == 0
-                    ? Text("")
-                    : ListView.builder(
-                        scrollDirection: Axis.vertical,
-                        shrinkWrap: true,
-                        itemCount: _listingStore.totalItems, // the length
-                        // itemCount: 2,
-                        itemBuilder: (context, index) {
-                          return _buildPresentation(index);
-                          // return Text('${_listingStore.getItem(index)}');
-                        })
-              ]);
+              return _listingStore.totalItems == 0
+                  ? Text("No data")
+                  : ListView.builder(
+                      // scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      itemCount: _listingStore.totalItems, // the length
+                      itemBuilder: (context, index) {
+                        return _buildPresentation(index);
+                        // return Text('${_listingStore.getItem(index)}');
+                      });
             }
           }
         });
