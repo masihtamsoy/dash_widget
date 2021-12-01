@@ -26,14 +26,21 @@ class ListingUiStoreWizard extends StatefulWidget {
 class _StoreWidgetWrapperState extends State<ListingUiStoreWizard> {
   late ListingStore _listingStore;
 
-  Future _listAllJobsWidget() {
+  Future<dynamic> _listAllJobsWidget() {
     // Loop over _listingStore.jobList(mobile, company_code)
     // _listingStore.getItems("8011230914", "DASH_20");
-    var myjobslisting = _listingStore.getApplicationListing("2");
 
-    print("<><><><><><><><><>< ${myjobslisting}");
+    Future<dynamic> myListing;
+    switch (widget.mode) {
+      case "application":
+        myListing = _listingStore.getApplicationListing("2");
+        break;
+      default:
+        myListing = _listingStore.getJobListing("8011230914", "DASH_20");
+    }
+    print("<><><><><><><><><>< ${myListing}");
 
-    return myjobslisting;
+    return myListing;
   }
 
   @override

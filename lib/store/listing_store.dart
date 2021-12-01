@@ -44,6 +44,26 @@ abstract class _ListingStore with Store {
     print("---item-------$item");
   }
 
+  Future getJobListing(String mobile, String companyCode) async {
+    final client = supa.SupabaseClient(
+        SupaConstants.supabaseUrl, SupaConstants.supabaseKey);
+
+    // final selectResponse = await client.from("jobs").select("*").execute();
+
+    final response = await client.rpc('get_job_list', params: {
+      'company_code_param': companyCode,
+      'mobile_number_param': mobile
+    }).execute();
+
+    data = [];
+    if (response.error == null) {
+      data = response.data as List;
+      print(">>>>>>${response.data}");
+    } else {
+      print(">>>> ${response.error}");
+    }
+  }
+
   Future getApplicationListing(String jobId) async {
     final client = supa.SupabaseClient(
         SupaConstants.supabaseUrl, SupaConstants.supabaseKey);
