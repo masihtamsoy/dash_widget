@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 // INFO: Create base classes, for good inheritance practices
 // class JobStoreWidgetWrapper<T, V> extends JobStoreWidgetWrapper<T, V> {
 class JobStoreWidgetWrapper extends StatefulWidget {
-  const JobStoreWidgetWrapper({Key? key}) : super(key: key);
+  const JobStoreWidgetWrapper({Key? key, Function? feedback}) : super(key: key);
   // INFO: Pick mobile and company_code from client
   // mobile
   // company_code
@@ -37,9 +37,11 @@ class _StoreWidgetWrapperState extends State<JobStoreWidgetWrapper> {
     super.didChangeDependencies();
   }
 
-  void _onPressed(int index) {
+  void _onPressed(int index, Function feedback) {
     _jobsStore.increment();
     _jobsStore.selectJob(_jobsStore.getJob(index));
+
+    feedback();
   }
 
   @override
@@ -76,7 +78,8 @@ class _StoreWidgetWrapperState extends State<JobStoreWidgetWrapper> {
                             salary: salary,
                             iconUri: iconUri,
                             onPressed: () {
-                              _onPressed(index);
+                              Function feedback = () => {};
+                              _onPressed(index, feedback);
 
                               Navigator.pushNamed(context, '/second');
                             },

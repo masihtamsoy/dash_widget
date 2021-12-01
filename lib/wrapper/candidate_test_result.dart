@@ -11,6 +11,7 @@ class CandidateTestResult extends StatefulWidget {
 class _CandidateTestResultState extends State<CandidateTestResult> {
   void _onPressed() {
     // Make api call to get test json, given by candidate
+    // _companyTestStore.getTestSubmitted('mobile', 'jobId');
   }
 
   @override

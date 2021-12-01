@@ -1,10 +1,11 @@
-import 'package:dash_widget/store/jobs_store.dart';
+import 'package:dash_widget/store/listing_store.dart';
 import 'package:flutter/material.dart';
 import 'package:dash_widget/dash_widget.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 
 import './journey.dart';
+import 'store/dash_store.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,14 +13,14 @@ void main() {
 
 class MyApp extends StatelessWidget {
   MyApp({Key? key}) : super(key: key);
-  final JobsStore _jobsStore = JobsStore();
+  final ListingStore _listingStore = ListingStore();
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        Provider<JobsStore>(create: (_) => _jobsStore),
+        Provider<ListingStore>(create: (_) => _listingStore),
       ],
       child: Observer(
           name: 'global-observer',
@@ -122,25 +123,27 @@ class _MyHomePageState extends State<MyHomePage> {
             //INFO: Pass app context or state
             // Idea is that User can access current state of JobStore
             // JobStoreWidgetWrapper(clientContext: context),
-            // _nativeJobsStore = dash_widget.store(_jobsStore);
-            // _nativeJobsStore.value
+            // LnativelistingStore = dash_widget.store(_listingStore);
+            // LnativelistingStore.value
             // INFO: This strategy does not work JobStoreWidgetWrapper is child?
-            const JobStoreWidgetWrapper(),
-
+            // const JobStoreWidgetWrapper(),
+            ListingUiStoreWizard(
+                feedback: () =>
+                    Provider.of<DashStore>(context, listen: false).value),
             const Text(
-              'JobsStore value in example/main initial',
+              'ListingStore value in example/main initial',
             ),
             Text(
-              '${Provider.of<JobsStore>(context, listen: false).value}',
+              '${Provider.of<ListingStore>(context, listen: false).value}',
               style: Theme.of(context).textTheme.headline4,
             ),
             Observer(
                 builder: (_) => Text(
-                      '${Provider.of<JobsStore>(context, listen: false).selectedJob} dynamic Jobs store value in example/main',
+                      '${Provider.of<ListingStore>(context, listen: false).selectedItem} dynamic Jobs store value in example/main',
                     )),
             Observer(
                 builder: (_) => Text(
-                      '${Provider.of<JobsStore>(context, listen: false).value} dynamic Jobs store value in example/main',
+                      '${Provider.of<ListingStore>(context, listen: false).value} dynamic Jobs store value in example/main',
                     )),
           ],
         ),
