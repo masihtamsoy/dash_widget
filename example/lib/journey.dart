@@ -12,10 +12,12 @@ class Journey extends StatelessWidget {
     return Column(
       children: [
         ListingUiStoreWizard(
+            dependencyState:
+                Provider.of<DashStore>(context, listen: false).jobSelected,
             mode: "application",
             pushRouteName: '/job',
             getCallbackStore: () =>
-                Provider.of<DashStore>(context, listen: false).value),
+                Provider.of<DashStore>(context, listen: false)),
       ],
     );
   }

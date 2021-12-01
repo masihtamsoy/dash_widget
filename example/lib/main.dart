@@ -134,20 +134,20 @@ class _MyHomePageState extends State<MyHomePage> {
               // INFO: This strategy does not work JobStoreWidgetWrapper is child?
               // const JobStoreWidgetWrapper(),
 
-              ListingUiStoreWizard(
-                  mode: "application",
-                  pushRouteName: '/job',
-                  getCallbackStore: () =>
-                      Provider.of<DashStore>(context, listen: false).value),
-
               // ListingUiStoreWizard(
-              //     mode: "job",
-              //     pushRouteName: '/application',
-              //     getCallbackStore: () {
-              //       return Provider.of<DashStore>(context, listen: false);
-              //     }
-              //     // Provider.of<DashStore>(context, listen: false)
-              //     ),
+              //     mode: "application",
+              //     pushRouteName: '/job',
+              //     getCallbackStore: () =>
+              //         Provider.of<DashStore>(context, listen: false)),
+
+              ListingUiStoreWizard(
+                  mode: "job",
+                  pushRouteName: '/application',
+                  getCallbackStore: () {
+                    return Provider.of<DashStore>(context, listen: false);
+                  }
+                  // Provider.of<DashStore>(context, listen: false)
+                  ),
 
               const Text(
                 'ListingStore value in example/main initial',

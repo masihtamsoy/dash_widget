@@ -63,7 +63,22 @@ abstract class _ListingStore with Store {
     }
   }
 
-  Future getApplicationListing(String jobId) async {
+  Future getAllJobs() async {
+    final client = supa.SupabaseClient(
+        SupaConstants.supabaseUrl, SupaConstants.supabaseKey);
+
+    final response = await client.from('jobs').select('*').execute();
+
+    data = [];
+    if (response.error == null) {
+      data = response.data as List;
+      print(">>>>>>${response.data}");
+    } else {
+      print(">>>> ${response.error}");
+    }
+  }
+
+  Future getApplicationListing(int jobId) async {
     final client = supa.SupabaseClient(
         SupaConstants.supabaseUrl, SupaConstants.supabaseKey);
 
@@ -72,7 +87,7 @@ abstract class _ListingStore with Store {
     final response = await client
         .from('application')
         .select('*')
-        .eq('job_id', '2')
+        .eq('job_id', jobId)
         .execute();
 
     data = [];

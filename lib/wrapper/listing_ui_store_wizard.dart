@@ -13,6 +13,7 @@ class ListingUiStoreWizard extends StatefulWidget {
   final Widget? child;
   final String pushRouteName;
   final String? mode;
+  final Map? dependencyState;
 
   const ListingUiStoreWizard(
       {Key? key,
@@ -20,7 +21,8 @@ class ListingUiStoreWizard extends StatefulWidget {
       this.getCallbackStore,
       this.child,
       this.pushRouteName = "",
-      this.mode = "application"})
+      this.mode,
+      this.dependencyState})
       : super(key: key);
 
   @override
@@ -34,15 +36,19 @@ class _StoreWidgetWrapperState extends State<ListingUiStoreWizard> {
     // Loop over _listingStore.jobList(mobile, company_code)
     // _listingStore.getItems("8011230914", "DASH_20");
 
-    Future<dynamic> myListing;
+    late Future<dynamic> myListing;
     switch (widget.mode) {
       case "application":
-        myListing = _listingStore.getApplicationListing("2");
+        int jobId = widget.dependencyState!['id'];
+        myListing = _listingStore.getApplicationListing(jobId);
+        break;
+      case "job":
+        myListing = _listingStore.getAllJobs();
+        // myListing = _listingStore.getJobListing("8011230914", "DASH_20");
         break;
       default:
-        myListing = _listingStore.getJobListing("8011230914", "DASH_20");
+        print("------unknown mode-------- ${widget.mode}");
     }
-    print("<><><><><><><><><>< ${myListing}");
 
     return myListing;
   }
