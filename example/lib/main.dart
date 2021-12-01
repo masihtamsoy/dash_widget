@@ -39,6 +39,7 @@ class MyApp extends StatelessWidget {
                 '/application': (context) => const Journey(),
                 '/job': (context) => const Journey(),
               },
+
               theme: ThemeData(
                 // This is the theme of your application.
                 //
@@ -107,66 +108,68 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            //INFO: Pass app context or state
-            // Idea is that User can access current state of JobStore
-            // JobStoreWidgetWrapper(clientContext: context),
-            // LnativelistingStore = dash_widget.store(_listingStore);
-            // LnativelistingStore.value
-            // INFO: This strategy does not work JobStoreWidgetWrapper is child?
-            // const JobStoreWidgetWrapper(),
+        child: SingleChildScrollView(
+          child: Column(
+            // Column is also a layout widget. It takes a list of children and
+            // arranges them vertically. By default, it sizes itself to fit its
+            // children horizontally, and tries to be as tall as its parent.
+            //
+            // Invoke "debug painting" (press "p" in the console, choose the
+            // "Toggle Debug Paint" action from the Flutter Inspector in Android
+            // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
+            // to see the wireframe for each widget.
+            //
+            // Column has various properties to control how it sizes itself and
+            // how it positions its children. Here we use mainAxisAlignment to
+            // center the children vertically; the main axis here is the vertical
+            // axis because Columns are vertical (the cross axis would be
+            // horizontal).
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              //INFO: Pass app context or state
+              // Idea is that User can access current state of JobStore
+              // JobStoreWidgetWrapper(clientContext: context),
+              // LnativelistingStore = dash_widget.store(_listingStore);
+              // LnativelistingStore.value
+              // INFO: This strategy does not work JobStoreWidgetWrapper is child?
+              // const JobStoreWidgetWrapper(),
 
-            ListingUiStoreWizard(
-                mode: "application",
-                pushRouteName: '/job',
-                getCallbackStore: () =>
-                    Provider.of<DashStore>(context, listen: false).value),
+              ListingUiStoreWizard(
+                  mode: "application",
+                  pushRouteName: '/job',
+                  getCallbackStore: () =>
+                      Provider.of<DashStore>(context, listen: false).value),
 
-            // ListingUiStoreWizard(
-            //     mode: "job",
-            //     pushRouteName: '/application',
-            //     getCallbackStore: () {
-            //       return Provider.of<DashStore>(context, listen: false);
-            //     }
-            //     // Provider.of<DashStore>(context, listen: false)
-            //     ),
+              // ListingUiStoreWizard(
+              //     mode: "job",
+              //     pushRouteName: '/application',
+              //     getCallbackStore: () {
+              //       return Provider.of<DashStore>(context, listen: false);
+              //     }
+              //     // Provider.of<DashStore>(context, listen: false)
+              //     ),
 
-            const Text(
-              'ListingStore value in example/main initial',
-            ),
-            Text(
-              '${Provider.of<ListingStore>(context, listen: false).value}',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-            Observer(
-                builder: (_) => Text(
-                      '${Provider.of<ListingStore>(context, listen: false).selectedItem} dynamic Jobs store value in example/main',
-                    )),
-            // Observer(
-            //     builder: (_) => Text(
-            //           '${Provider.of<DashStore>(context, listen: false).jobSelected} dynamic Jobs store value in example/main',
-            //         )),
-            Observer(
-                builder: (_) => Text(
-                      '${Provider.of<ListingStore>(context, listen: false).value} dynamic Jobs store value in example/main',
-                    )),
-          ],
+              const Text(
+                'ListingStore value in example/main initial',
+              ),
+              Text(
+                '${Provider.of<ListingStore>(context, listen: false).value}',
+                style: Theme.of(context).textTheme.headline4,
+              ),
+              Observer(
+                  builder: (_) => Text(
+                        '${Provider.of<ListingStore>(context, listen: false).selectedItem} dynamic Jobs store value in example/main',
+                      )),
+              // Observer(
+              //     builder: (_) => Text(
+              //           '${Provider.of<DashStore>(context, listen: false).jobSelected} dynamic Jobs store value in example/main',
+              //         )),
+              Observer(
+                  builder: (_) => Text(
+                        '${Provider.of<ListingStore>(context, listen: false).value} dynamic Jobs store value in example/main',
+                      )),
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(

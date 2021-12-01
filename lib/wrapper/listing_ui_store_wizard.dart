@@ -116,7 +116,8 @@ class _StoreWidgetWrapperState extends State<ListingUiStoreWizard> {
               return _listingStore.totalItems == 0
                   ? Text("No data")
                   : ListView.builder(
-                      // scrollDirection: Axis.vertical,
+                      physics: NeverScrollableScrollPhysics(),
+                      scrollDirection: Axis.vertical,
                       shrinkWrap: true,
                       itemCount: _listingStore.totalItems, // the length
                       itemBuilder: (context, index) {
