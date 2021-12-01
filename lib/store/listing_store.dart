@@ -86,7 +86,7 @@ abstract class _ListingStore with Store {
 
     final response = await client
         .from('application')
-        .select('*')
+        .select('*, onboarding(*)')
         .eq('job_id', jobId)
         .execute();
 

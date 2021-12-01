@@ -4,9 +4,14 @@ class SimpleCardWidget extends StatelessWidget {
   final String title;
   final String subtitle;
   final String answers;
+  final String onboarding;
 
   const SimpleCardWidget(
-      {Key? key, this.title = "", this.subtitle = "", this.answers = ""})
+      {Key? key,
+      this.title = "",
+      this.subtitle = "",
+      this.answers = "",
+      this.onboarding = ""})
       : super(key: key);
 
   @override
@@ -23,13 +28,12 @@ class SimpleCardWidget extends StatelessWidget {
                 title: Text(title),
                 subtitle: Text(subtitle),
               ),
-              Row(
+              Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
-                  Flexible(
-                    child: Text(answers),
-                  ),
-                  SizedBox(width: 8),
+                  Text(answers),
+                  const SizedBox(height: 10),
+                  Text(onboarding)
                 ],
               ),
             ],

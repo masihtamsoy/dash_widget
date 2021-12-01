@@ -81,10 +81,17 @@ class _StoreWidgetWrapperState extends State<ListingUiStoreWizard> {
 
   Widget _buildApplicantPresentation(int index) {
     String mobile = _listingStore.getItem(index)['mobile'] ?? "";
-    String jobId = "1234";
+    String fullname =
+        _listingStore.getItem(index)['onboarding']!['fullname'] ?? "";
     String answers = json.encode(_listingStore.getItem(index)['answers'] ?? {});
+    String onboarding =
+        json.encode(_listingStore.getItem(index)['onboarding'] ?? {});
 
-    return SimpleCardWidget(title: mobile, subtitle: jobId, answers: answers);
+    return SimpleCardWidget(
+        title: mobile,
+        subtitle: fullname,
+        onboarding: onboarding,
+        answers: answers);
   }
 
   Widget _buildJobPresentation(int index) {
