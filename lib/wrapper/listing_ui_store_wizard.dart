@@ -7,16 +7,18 @@ import 'package:provider/provider.dart';
 // INFO: Create base classes, for good inheritance practices
 // class ListingUiStoreWizard<T, V> extends ListingUiStoreWizard<T, V> {
 class ListingUiStoreWizard extends StatefulWidget {
-  final VoidCallback feedback;
+  // final Function feedback;
+  final Function? getCallbackStore;
   final Widget? child;
-  final String? pushRouteName;
+  final String pushRouteName;
   final String? mode;
 
   const ListingUiStoreWizard(
       {Key? key,
-      required this.feedback,
+      // required this.feedback,
+      this.getCallbackStore,
       this.child,
-      this.pushRouteName,
+      this.pushRouteName = "",
       this.mode = "application"})
       : super(key: key);
 
@@ -46,26 +48,27 @@ class _StoreWidgetWrapperState extends State<ListingUiStoreWizard> {
 
   @override
   void didChangeDependencies() {
-    print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
     // TODO: implement didChangeDependencies
     _listingStore = Provider.of<ListingStore>(context, listen: true);
 
     super.didChangeDependencies();
   }
 
-  void _onPressed(int index, Function feedback) {
+  void _onPressed(int index) {
     _listingStore.increment();
     _listingStore.selectItem(_listingStore.getItem(index));
 
-    feedback();
+    widget.getCallbackStore!().selectJob(_listingStore.getItem(index));
   }
 
   Widget _buildPresentation(int index) {
     switch (widget.mode) {
       case "job":
         return _buildJobPresentation(index);
-      default:
+      case "application":
         return _buildApplicantPresentation(index);
+      default:
+        return Text("No widget");
     }
   }
 
@@ -93,10 +96,9 @@ class _StoreWidgetWrapperState extends State<ListingUiStoreWizard> {
       salary: salary,
       iconUri: iconUri,
       onPressed: () {
-        Function feedback = () => {};
-        _onPressed(index, feedback);
+        _onPressed(index);
 
-        Navigator.pushNamed(context, '/second');
+        Navigator.pushNamed(context, widget.pushRouteName);
       },
     );
   }
@@ -118,8 +120,8 @@ class _StoreWidgetWrapperState extends State<ListingUiStoreWizard> {
                     : ListView.builder(
                         scrollDirection: Axis.vertical,
                         shrinkWrap: true,
-                        // itemCount: _listingStore.totalItems, // the length
-                        itemCount: 2,
+                        itemCount: _listingStore.totalItems, // the length
+                        // itemCount: 2,
                         itemBuilder: (context, index) {
                           return _buildPresentation(index);
                           // return Text('${_listingStore.getItem(index)}');

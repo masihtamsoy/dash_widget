@@ -29,7 +29,6 @@ abstract class _ListingStore with Store {
       item = data[index];
     }
 
-    print("---getitem-------$index");
     return item as Map;
   }
 
@@ -41,7 +40,7 @@ abstract class _ListingStore with Store {
   @action
   void selectItem(Map item) {
     selectedItem = item;
-    print("---item-------$item");
+    print("-----selectedItem-------$item");
   }
 
   Future getJobListing(String mobile, String companyCode) async {

@@ -21,11 +21,13 @@ abstract class DashStoreBase with Store {
 
   @action
   void selectJob(Map job) {
+    print("-----jobSelected------- $job");
     jobSelected = job;
   }
 
   @action
   void selectApplication(Map application) {
+    print("-----applicationSelected------- $application");
     applicationSelected = application;
   }
 }
