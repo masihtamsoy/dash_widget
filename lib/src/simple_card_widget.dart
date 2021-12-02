@@ -33,6 +33,8 @@ class SimpleCardWidget extends StatelessWidget {
               Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
+                  Text(totalScore),
+                  const SizedBox(height: 10),
                   Text(answers),
                   const SizedBox(height: 10),
                   Text(onboarding)

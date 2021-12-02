@@ -93,7 +93,7 @@ class _StoreWidgetWrapperState extends State<ListingUiStoreWizard> {
     String mobile = _listingStore.getItem(index)['mobile'] ?? "";
     String fullname =
         _listingStore.getItem(index)['onboarding']!['fullname'] ?? "";
-    String totalScore = _listingStore.getItem(index)['test_score'] ?? "";
+    String totalScore = _listingStore.getItem(index)['test_score']!.toString();
     String answers = json.encode(_listingStore.getItem(index)['answers'] ?? {});
     String onboarding =
         json.encode(_listingStore.getItem(index)['onboarding'] ?? {});
