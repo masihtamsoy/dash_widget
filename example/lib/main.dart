@@ -6,6 +6,8 @@ import 'package:provider/provider.dart';
 
 import './journey.dart';
 import 'store/dash_store.dart';
+import 'screens/applicants_listing.dart';
+import 'screens/jobs_listing.dart';
 
 void main() {
   runApp(MyApp());
@@ -32,12 +34,11 @@ class MyApp extends StatelessWidget {
               initialRoute: '/',
               routes: {
                 // When navigating to the "/" route, build the FirstScreen widget.
-                '/': (context) =>
-                    const MyHomePage(title: 'Flutter Demo Home Page'),
+                '/': (context) => JobsListingScreen(),
                 // When navigating to the "/second" route, build the SecondScreen widget.
                 '/second': (context) => const Journey(),
-                '/application': (context) => const Journey(),
-                '/job': (context) => const Journey(),
+                '/job': (_) => JobsListingScreen(),
+                '/application': (_) => ApplicationsListingScreen(),
               },
 
               theme: ThemeData(
@@ -140,14 +141,14 @@ class _MyHomePageState extends State<MyHomePage> {
               //     getCallbackStore: () =>
               //         Provider.of<DashStore>(context, listen: false)),
 
-              ListingUiStoreWizard(
-                  mode: "job",
-                  pushRouteName: '/application',
-                  getCallbackStore: () {
-                    return Provider.of<DashStore>(context, listen: false);
-                  }
-                  // Provider.of<DashStore>(context, listen: false)
-                  ),
+              // ListingUiStoreWizard(
+              //     mode: "job",
+              //     pushRouteName: '/application',
+              //     getCallbackStore: () {
+              //       return Provider.of<DashStore>(context, listen: false);
+              //     }
+              //     // Provider.of<DashStore>(context, listen: false)
+              //     ),
 
               const Text(
                 'ListingStore value in example/main initial',

@@ -59,9 +59,9 @@ abstract class _ListingStore with Store {
     data = [];
     if (response.error == null) {
       data = response.data as List;
-      print(">>>>>>${response.data}");
+      print(">>data>>>>${response.data}");
     } else {
-      print(">>>> ${response.error}");
+      print(">>>>data error>>>> ${response.error}");
     }
   }
 
@@ -75,9 +75,9 @@ abstract class _ListingStore with Store {
     data = [];
     if (response.error == null) {
       data = response.data as List;
-      print(">>>>>>${response.data}");
+      print(">>data>>>>${response.data}");
     } else {
-      print(">>>> ${response.error}");
+      print(">>>>data error>>>> ${response.error}");
     }
   }
 
@@ -97,9 +97,9 @@ abstract class _ListingStore with Store {
     data = [];
     if (response.error == null) {
       data = response.data as List;
-      print(">>>>>>${response.data}");
+      print(">>data>>>>${response.data}");
     } else {
-      print(">>>> ${response.error}");
+      print(">>>>data error>>>> ${response.error}");
     }
   }
 }

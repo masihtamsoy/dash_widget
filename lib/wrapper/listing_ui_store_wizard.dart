@@ -32,7 +32,8 @@ class ListingUiStoreWizard extends StatefulWidget {
 class _StoreWidgetWrapperState extends State<ListingUiStoreWizard> {
   late ListingStore _listingStore;
 
-  Future<dynamic> _listAllJobsWidget() {
+  Future<dynamic> _listingWidget() {
+    print("-------listing widget mode----------${widget.mode}");
     // Loop over _listingStore.jobList(mobile, company_code)
     // _listingStore.getItems("8011230914", "DASH_20");
 
@@ -65,7 +66,16 @@ class _StoreWidgetWrapperState extends State<ListingUiStoreWizard> {
     _listingStore.increment();
     _listingStore.selectItem(_listingStore.getItem(index));
 
-    widget.getCallbackStore!().selectJob(_listingStore.getItem(index));
+    switch (widget.mode) {
+      case "job":
+        widget.getCallbackStore!().selectJob(_listingStore.getItem(index));
+        break;
+      case "application":
+        widget.getCallbackStore!()
+            .applicationSelected(_listingStore.getItem(index));
+        break;
+      default:
+    }
   }
 
   Widget _buildPresentation(int index) {
@@ -113,7 +123,10 @@ class _StoreWidgetWrapperState extends State<ListingUiStoreWizard> {
       onPressed: () {
         _onPressed(index);
 
-        Navigator.pushNamed(context, widget.pushRouteName);
+        // INFO: on push without Remove util, on back parent widget not gets build
+        // Use pushNamedAndRemoveUntil
+        Navigator.pushNamedAndRemoveUntil(
+            context, widget.pushRouteName, (route) => false);
       },
     );
   }
@@ -121,7 +134,7 @@ class _StoreWidgetWrapperState extends State<ListingUiStoreWizard> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: _listAllJobsWidget(),
+        future: _listingWidget(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: Text('Please wait its loading...'));
