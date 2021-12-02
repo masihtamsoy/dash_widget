@@ -83,15 +83,18 @@ class _StoreWidgetWrapperState extends State<ListingUiStoreWizard> {
     String mobile = _listingStore.getItem(index)['mobile'] ?? "";
     String fullname =
         _listingStore.getItem(index)['onboarding']!['fullname'] ?? "";
+    String totalScore = _listingStore.getItem(index)['test_score'] ?? "";
     String answers = json.encode(_listingStore.getItem(index)['answers'] ?? {});
     String onboarding =
         json.encode(_listingStore.getItem(index)['onboarding'] ?? {});
 
     return SimpleCardWidget(
-        title: mobile,
-        subtitle: fullname,
-        onboarding: onboarding,
-        answers: answers);
+      title: mobile,
+      subtitle: fullname,
+      onboarding: onboarding,
+      answers: answers,
+      totalScore: totalScore,
+    );
   }
 
   Widget _buildJobPresentation(int index) {

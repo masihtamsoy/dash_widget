@@ -5,13 +5,15 @@ class SimpleCardWidget extends StatelessWidget {
   final String subtitle;
   final String answers;
   final String onboarding;
+  final String totalScore;
 
   const SimpleCardWidget(
       {Key? key,
       this.title = "",
       this.subtitle = "",
       this.answers = "",
-      this.onboarding = ""})
+      this.onboarding = "",
+      this.totalScore = ""})
       : super(key: key);
 
   @override

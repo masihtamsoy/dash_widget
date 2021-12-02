@@ -12,6 +12,7 @@ class ListingStore = _ListingStore with _$ListingStore;
 
 // The store-class
 abstract class _ListingStore with Store {
+  @observable
   late List data = [];
 
   @observable
@@ -43,6 +44,7 @@ abstract class _ListingStore with Store {
     print("-----selectedItem-------$item");
   }
 
+  @action
   Future getJobListing(String mobile, String companyCode) async {
     final client = supa.SupabaseClient(
         SupaConstants.supabaseUrl, SupaConstants.supabaseKey);
@@ -63,6 +65,7 @@ abstract class _ListingStore with Store {
     }
   }
 
+  @action
   Future getAllJobs() async {
     final client = supa.SupabaseClient(
         SupaConstants.supabaseUrl, SupaConstants.supabaseKey);
@@ -78,6 +81,7 @@ abstract class _ListingStore with Store {
     }
   }
 
+  @action
   Future getApplicationListing(int jobId) async {
     final client = supa.SupabaseClient(
         SupaConstants.supabaseUrl, SupaConstants.supabaseKey);

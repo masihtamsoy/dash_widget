@@ -17,6 +17,21 @@ mixin _$ListingStore on _ListingStore, Store {
               name: '_ListingStore.totalItems'))
           .value;
 
+  final _$dataAtom = Atom(name: '_ListingStore.data');
+
+  @override
+  List<dynamic> get data {
+    _$dataAtom.reportRead();
+    return super.data;
+  }
+
+  @override
+  set data(List<dynamic> value) {
+    _$dataAtom.reportWrite(value, super.data, () {
+      super.data = value;
+    });
+  }
+
   final _$valueAtom = Atom(name: '_ListingStore.value');
 
   @override
@@ -47,6 +62,30 @@ mixin _$ListingStore on _ListingStore, Store {
     });
   }
 
+  final _$getJobListingAsyncAction = AsyncAction('_ListingStore.getJobListing');
+
+  @override
+  Future<dynamic> getJobListing(String mobile, String companyCode) {
+    return _$getJobListingAsyncAction
+        .run(() => super.getJobListing(mobile, companyCode));
+  }
+
+  final _$getAllJobsAsyncAction = AsyncAction('_ListingStore.getAllJobs');
+
+  @override
+  Future<dynamic> getAllJobs() {
+    return _$getAllJobsAsyncAction.run(() => super.getAllJobs());
+  }
+
+  final _$getApplicationListingAsyncAction =
+      AsyncAction('_ListingStore.getApplicationListing');
+
+  @override
+  Future<dynamic> getApplicationListing(int jobId) {
+    return _$getApplicationListingAsyncAction
+        .run(() => super.getApplicationListing(jobId));
+  }
+
   final _$_ListingStoreActionController =
       ActionController(name: '_ListingStore');
 
@@ -75,6 +114,7 @@ mixin _$ListingStore on _ListingStore, Store {
   @override
   String toString() {
     return '''
+data: ${data},
 value: ${value},
 selectedItem: ${selectedItem},
 totalItems: ${totalItems}
