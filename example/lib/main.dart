@@ -34,11 +34,13 @@ class MyApp extends StatelessWidget {
               initialRoute: '/',
               routes: {
                 // When navigating to the "/" route, build the FirstScreen widget.
-                '/': (context) => JobsListingScreen(),
+                '/': (context) => CountdownPage(),
                 // When navigating to the "/second" route, build the SecondScreen widget.
                 '/second': (context) => const Journey(),
                 '/job': (_) => JobsListingScreen(),
                 '/application': (_) => ApplicationsListingScreen(),
+                '/quiz': (_) => WizardForm(),
+                '/timer': (_) => CountdownPage(),
               },
 
               theme: ThemeData(
