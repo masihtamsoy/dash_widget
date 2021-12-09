@@ -42,15 +42,15 @@ class WizardFormBloc extends FormBloc<String, String> {
   WizardFormBloc() {
     addFieldBlocs(
       step: 0,
-      fieldBlocs: [username, email, password],
+      fieldBlocs: [username],
     );
     addFieldBlocs(
       step: 1,
-      fieldBlocs: [firstName, lastName, gender, birthDate],
+      fieldBlocs: [firstName],
     );
     addFieldBlocs(
       step: 2,
-      fieldBlocs: [github, twitter, facebook],
+      fieldBlocs: [github],
     );
   }
 
@@ -143,11 +143,12 @@ class _WizardFormState extends State<WizardForm> {
                     type: _type,
                     physics: ClampingScrollPhysics(),
                     stepsBuilder: (formBloc) {
-                      return [
-                        _accountStep(formBloc!),
-                        _personalStep(formBloc),
-                        _socialStep(formBloc),
-                      ];
+                      return _dynamicQuestionSteps(formBloc!);
+                      // return [
+                      //   _accountStep(formBloc),
+                      //   _personalStep(formBloc),
+                      //   _socialStep(formBloc),
+                      // ];
                     },
                   ),
                 ),
@@ -157,6 +158,50 @@ class _WizardFormState extends State<WizardForm> {
         },
       ),
     );
+  }
+
+  List<FormBlocStep> _dynamicQuestionSteps(WizardFormBloc wizardFormBloc) {
+    return [
+      FormBlocStep(
+          title: Text('Account'),
+          subtitle: Text('Here it is'),
+          content: Column(children: <Widget>[
+            Text("Here is question 1"),
+            TextFieldBlocBuilder(
+              textFieldBloc: wizardFormBloc.username,
+              keyboardType: TextInputType.emailAddress,
+              enableOnlyWhenFormBlocCanSubmit: true,
+              decoration: InputDecoration(
+                labelText: 'Username',
+                prefixIcon: Icon(Icons.person),
+              ),
+            ),
+          ])),
+      FormBlocStep(
+          title: Text('Account123'),
+          content: Column(children: <Widget>[
+            TextFieldBlocBuilder(
+              textFieldBloc: wizardFormBloc.firstName,
+              keyboardType: TextInputType.emailAddress,
+              decoration: InputDecoration(
+                labelText: 'First Name',
+                prefixIcon: Icon(Icons.person),
+              ),
+            ),
+          ])),
+      FormBlocStep(
+          title: Text('Account345'),
+          content: Column(children: <Widget>[
+            TextFieldBlocBuilder(
+              textFieldBloc: wizardFormBloc.github,
+              keyboardType: TextInputType.emailAddress,
+              decoration: InputDecoration(
+                labelText: 'Github',
+                prefixIcon: Icon(Icons.sentiment_satisfied),
+              ),
+            ),
+          ]))
+    ];
   }
 
   FormBlocStep _accountStep(WizardFormBloc wizardFormBloc) {

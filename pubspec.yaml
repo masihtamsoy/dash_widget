@@ -21,7 +21,8 @@ dependencies:
   supabase_flutter: ^0.2.9
 
   # Forms: implementation of quiz journey for companies
-  flutter_form_bloc: ^0.29.1
+  flutter_form_bloc:
+    path: ../form_bloc/packages/flutter_form_bloc
   flutter_countdown_timer: ^4.1.0
 
 dev_dependencies:

@@ -240,10 +240,10 @@ packages:
   flutter_form_bloc:
     dependency: transitive
     description:
-      name: flutter_form_bloc
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.29.1"
+      path: "../../form_bloc/packages/flutter_form_bloc"
+      relative: true
+    source: path
+    version: "0.29.0"
   flutter_keyboard_visibility:
     dependency: transitive
     description:
