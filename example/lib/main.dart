@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
               initialRoute: '/',
               routes: {
                 // When navigating to the "/" route, build the FirstScreen widget.
-                '/': (context) => JobsListingScreen(),
+                '/': (context) => QuizFormsCountDownWizard(),
                 // When navigating to the "/second" route, build the SecondScreen widget.
                 '/second': (context) => const Journey(),
                 '/job': (_) => JobsListingScreen(),
