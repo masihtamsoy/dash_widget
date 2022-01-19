@@ -1,3 +1,6 @@
+/// INFO Add listing related @action, @observable
+/// getAllJobs(), getAllCompanyRole()
+
 import 'dart:convert';
 
 import 'package:mobx/mobx.dart';
@@ -72,7 +75,7 @@ abstract class _ListingStore with Store {
 
     final response = await client
         .from('company_role')
-        .select('company(name),role(name)')
+        .select('id,company(id,name),role(id,name)')
         .execute();
 
     data = [];
@@ -111,6 +114,28 @@ abstract class _ListingStore with Store {
         .from('application')
         .select('*, onboarding(*)')
         .eq('job_id', jobId)
+        .execute();
+
+    data = [];
+    if (response.error == null) {
+      data = response.data as List;
+      print(">>data>>>>${response.data}");
+    } else {
+      print(">>>>data error>>>> ${response.error}");
+    }
+  }
+
+  @action
+  Future getCandidateListing(int companyRoleId) async {
+    final client = supa.SupabaseClient(
+        SupaConstants.supabaseUrl, SupaConstants.supabaseKey);
+
+    // final selectResponse = await client.from("jobs").select("*").execute();
+
+    final response = await client
+        .from('candidate_company_role')
+        .select('internal_status,external_status,candidates(name, mobile)')
+        .eq('company_role_id', companyRoleId)
         .execute();
 
     data = [];

@@ -32,6 +32,7 @@ class ListingUiStoreWizard extends StatefulWidget {
 class _StoreWidgetWrapperState extends State<ListingUiStoreWizard> {
   late ListingStore _listingStore;
 
+  /// Make call to Mobx listing function based on widget.mode
   Future<dynamic> _listingWidget() {
     print("-------listing widget mode----------${widget.mode}");
     // Loop over _listingStore.jobList(mobile, company_code)
@@ -42,6 +43,10 @@ class _StoreWidgetWrapperState extends State<ListingUiStoreWizard> {
       case "application":
         int jobId = widget.dependencyState!['id'];
         myListing = _listingStore.getApplicationListing(jobId);
+        break;
+      case "candidate":
+        int companyRoleId = 1;
+        myListing = _listingStore.getCandidateListing(companyRoleId);
         break;
       case "job":
         myListing = _listingStore.getAllJobs();
@@ -77,14 +82,21 @@ class _StoreWidgetWrapperState extends State<ListingUiStoreWizard> {
         widget.getCallbackStore!()
             .applicationSelected(_listingStore.getItem(index));
         break;
+      case "company_role":
+        widget.getCallbackStore!()
+            .selectCompanyRole(_listingStore.getItem(index));
+        break;
       default:
     }
   }
 
+  /// buildPresentation wrt widget.mode, parse data and feed to card
   Widget _buildPresentation(int index) {
     switch (widget.mode) {
       case "job":
         return _buildJobPresentation(index);
+      case "candidate":
+        return _buildCandidatePresentation(index);
       case "application":
         return _buildApplicantPresentation(index);
       case "company_role":
@@ -92,6 +104,16 @@ class _StoreWidgetWrapperState extends State<ListingUiStoreWizard> {
       default:
         return Text("No widget");
     }
+  }
+
+  Widget _buildCandidatePresentation(int index) {
+    String fullname = _listingStore.getItem(index)["candidates"]["name"];
+    String totalScore =
+        _listingStore.getItem(index)["candidates"]["mobile"].toString();
+    return SimpleCardWidget(
+      subtitle: fullname,
+      totalScore: totalScore,
+    );
   }
 
   Widget _buildCompanyRolePresentation(int index) {

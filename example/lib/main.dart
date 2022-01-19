@@ -44,9 +44,12 @@ class MyApp extends StatelessWidget {
                 '/timer': (_) => CountdownPage(),
                 '/landing': (_) => CountdownPage(),
                 '/calling_page': (_) => JobsListingScreen(
-                      mode: 'company_role',
+                    mode: 'company_role', pushRouteName: '/candidates_page'),
+                '/client_page': (_) => JobsListingScreen(
+                    mode: 'company_role', pushRouteName: '/candidates_page'),
+                '/candidates_page': (_) => JobsListingScreen(
+                      mode: 'candidate',
                     ),
-                '/client_page': (_) => CountdownPage(),
               },
 
               theme: ThemeData(

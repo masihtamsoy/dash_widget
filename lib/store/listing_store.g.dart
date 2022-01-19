@@ -94,6 +94,15 @@ mixin _$ListingStore on _ListingStore, Store {
         .run(() => super.getApplicationListing(jobId));
   }
 
+  final _$getCandidateListingAsyncAction =
+      AsyncAction('_ListingStore.getCandidateListing');
+
+  @override
+  Future<dynamic> getCandidateListing(int companyRoleId) {
+    return _$getCandidateListingAsyncAction
+        .run(() => super.getCandidateListing(companyRoleId));
+  }
+
   final _$_ListingStoreActionController =
       ActionController(name: '_ListingStore');
 
