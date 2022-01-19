@@ -32,13 +32,19 @@ class _JobsListingScreenState extends State<JobsListingScreen> {
         child: Column(
           children: [
             ListingUiStoreWizard(
-                mode: widget.mode,
-                pushRouteName: widget.pushRouteName,
-                getCallbackStore: () {
-                  return Provider.of<DashStore>(context, listen: false);
-                }
-                // Provider.of<DashStore>(context, listen: false)
-                ),
+              mode: widget.mode,
+              pushRouteName: widget.pushRouteName,
+              getCallbackStore: () {
+                return Provider.of<DashStore>(context, listen: false);
+              },
+
+              /// Write comment
+              dependencyState: widget.mode == "candidate"
+                  ? Provider.of<DashStore>(context, listen: false)
+                      .companyRoleSelected
+                  : null,
+              // Provider.of<DashStore>(context, listen: false)
+            ),
             // const Text(
             //   'JobsStore value in example/main initial',
             // ),

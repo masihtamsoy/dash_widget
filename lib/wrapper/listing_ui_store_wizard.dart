@@ -45,7 +45,7 @@ class _StoreWidgetWrapperState extends State<ListingUiStoreWizard> {
         myListing = _listingStore.getApplicationListing(jobId);
         break;
       case "candidate":
-        int companyRoleId = 1;
+        int companyRoleId = widget.dependencyState!['id'];
         myListing = _listingStore.getCandidateListing(companyRoleId);
         break;
       case "job":
@@ -122,6 +122,14 @@ class _StoreWidgetWrapperState extends State<ListingUiStoreWizard> {
     return SimpleCardWidget(
       subtitle: fullname,
       totalScore: totalScore,
+      onPressed: () {
+        _onPressed(index);
+
+        // INFO: on push without Remove util, on back parent widget not gets build
+        // Use pushNamedAndRemoveUntil
+        Navigator.pushNamedAndRemoveUntil(
+            context, widget.pushRouteName, (route) => false);
+      },
     );
   }
 
