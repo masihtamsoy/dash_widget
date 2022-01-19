@@ -6,6 +6,10 @@ import 'package:provider/provider.dart';
 import '../store/dash_store.dart';
 
 class JobsListingScreen extends StatefulWidget {
+  final String mode;
+
+  JobsListingScreen({Key? key, this.mode = 'job'}) : super(key: key);
+
   @override
   _JobsListingScreenState createState() => _JobsListingScreenState();
 }
@@ -25,7 +29,7 @@ class _JobsListingScreenState extends State<JobsListingScreen> {
         child: Column(
           children: [
             ListingUiStoreWizard(
-                mode: "job",
+                mode: widget.mode,
                 pushRouteName: '/application',
                 getCallbackStore: () {
                   return Provider.of<DashStore>(context, listen: false);

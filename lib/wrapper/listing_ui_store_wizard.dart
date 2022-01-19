@@ -47,6 +47,9 @@ class _StoreWidgetWrapperState extends State<ListingUiStoreWizard> {
         myListing = _listingStore.getAllJobs();
         // myListing = _listingStore.getJobListing("8011230914", "DASH_20");
         break;
+      case "company_role":
+        myListing = _listingStore.getAllCompanyRole();
+        break;
       default:
         print("------unknown mode-------- ${widget.mode}");
     }
@@ -84,9 +87,20 @@ class _StoreWidgetWrapperState extends State<ListingUiStoreWizard> {
         return _buildJobPresentation(index);
       case "application":
         return _buildApplicantPresentation(index);
+      case "company_role":
+        return _buildCompanyRolePresentation(index);
       default:
         return Text("No widget");
     }
+  }
+
+  Widget _buildCompanyRolePresentation(int index) {
+    String fullname = _listingStore.getItem(index)["company"]["name"];
+    String totalScore = _listingStore.getItem(index)["role"]["name"];
+    return SimpleCardWidget(
+      subtitle: fullname,
+      totalScore: totalScore,
+    );
   }
 
   Widget _buildApplicantPresentation(int index) {

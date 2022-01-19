@@ -8,6 +8,7 @@ import './journey.dart';
 import 'store/dash_store.dart';
 import 'screens/applicants_listing.dart';
 import 'screens/jobs_listing.dart';
+import 'screens/admin_listing.dart';
 
 void main() {
   runApp(MyApp());
@@ -34,13 +35,18 @@ class MyApp extends StatelessWidget {
               initialRoute: '/',
               routes: {
                 // When navigating to the "/" route, build the FirstScreen widget.
-                '/': (context) => WizardForm(),
+                '/': (context) => AdminListing(),
                 // When navigating to the "/second" route, build the SecondScreen widget.
                 '/second': (context) => const Journey(),
                 '/job': (_) => JobsListingScreen(),
                 '/application': (_) => ApplicationsListingScreen(),
                 '/quiz': (_) => WizardForm(),
                 '/timer': (_) => CountdownPage(),
+                '/landing': (_) => CountdownPage(),
+                '/calling_page': (_) => JobsListingScreen(
+                      mode: 'company_role',
+                    ),
+                '/client_page': (_) => CountdownPage(),
               },
 
               theme: ThemeData(

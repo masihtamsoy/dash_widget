@@ -66,6 +66,25 @@ abstract class _ListingStore with Store {
   }
 
   @action
+  Future getAllCompanyRole() async {
+    final client = supa.SupabaseClient(
+        SupaConstants.supabaseUrl, SupaConstants.supabaseKey);
+
+    final response = await client
+        .from('company_role')
+        .select('company(name),role(name)')
+        .execute();
+
+    data = [];
+    if (response.error == null) {
+      data = response.data as List;
+      print(">>data>>>>${response.data}");
+    } else {
+      print(">>>>data error>>>> ${response.error}");
+    }
+  }
+
+  @action
   Future getAllJobs() async {
     final client = supa.SupabaseClient(
         SupaConstants.supabaseUrl, SupaConstants.supabaseKey);

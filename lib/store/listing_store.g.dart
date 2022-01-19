@@ -70,6 +70,14 @@ mixin _$ListingStore on _ListingStore, Store {
         .run(() => super.getJobListing(mobile, companyCode));
   }
 
+  final _$getAllCompanyRoleAsyncAction =
+      AsyncAction('_ListingStore.getAllCompanyRole');
+
+  @override
+  Future<dynamic> getAllCompanyRole() {
+    return _$getAllCompanyRoleAsyncAction.run(() => super.getAllCompanyRole());
+  }
+
   final _$getAllJobsAsyncAction = AsyncAction('_ListingStore.getAllJobs');
 
   @override
