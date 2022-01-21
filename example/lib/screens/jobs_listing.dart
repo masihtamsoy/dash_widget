@@ -5,11 +5,11 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 import '../store/dash_store.dart';
 
-class JobsListingScreen extends StatefulWidget {
+class ListingScreen extends StatefulWidget {
   final String mode;
   final String pushRouteName;
 
-  JobsListingScreen(
+  ListingScreen(
       {Key? key, this.mode = 'job', this.pushRouteName = '/application'})
       : super(key: key);
 
@@ -17,7 +17,7 @@ class JobsListingScreen extends StatefulWidget {
   _JobsListingScreenState createState() => _JobsListingScreenState();
 }
 
-class _JobsListingScreenState extends State<JobsListingScreen> {
+class _JobsListingScreenState extends State<ListingScreen> {
   // job = Provider<context._jobsStore>.selectedItem
   // DashStore.selectJob(job);
   // DashStore.selectApplication(application);

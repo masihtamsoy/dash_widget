@@ -38,16 +38,16 @@ class MyApp extends StatelessWidget {
                 '/': (context) => AdminListing(),
                 // When navigating to the "/second" route, build the SecondScreen widget.
                 '/second': (context) => const Journey(),
-                '/job': (_) => JobsListingScreen(),
+                '/job': (_) => ListingScreen(),
                 '/application': (_) => ApplicationsListingScreen(),
                 // '/quiz': (_) => WizardForm(),
                 '/timer': (_) => CountdownPage(),
                 '/landing': (_) => CountdownPage(),
-                '/calling_page': (_) => JobsListingScreen(
+                '/calling_page': (_) => ListingScreen(
                     mode: 'company_role', pushRouteName: '/candidates_page'),
-                '/client_page': (_) => JobsListingScreen(
+                '/client_page': (_) => ListingScreen(
                     mode: 'company_role', pushRouteName: '/candidates_page'),
-                '/candidates_page': (_) => JobsListingScreen(
+                '/candidates_page': (_) => ListingScreen(
                       mode: 'candidate',
                     ),
               },
