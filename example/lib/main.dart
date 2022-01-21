@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
                 '/second': (context) => const Journey(),
                 '/job': (_) => JobsListingScreen(),
                 '/application': (_) => ApplicationsListingScreen(),
-                '/quiz': (_) => WizardForm(),
+                // '/quiz': (_) => WizardForm(),
                 '/timer': (_) => CountdownPage(),
                 '/landing': (_) => CountdownPage(),
                 '/calling_page': (_) => JobsListingScreen(
