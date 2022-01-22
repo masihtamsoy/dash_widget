@@ -36,20 +36,33 @@ class MyApp extends StatelessWidget {
               routes: {
                 // When navigating to the "/" route, build the FirstScreen widget.
                 '/': (context) => AdminListing(),
+                '/admins': (context) => AdminListing(),
                 // When navigating to the "/second" route, build the SecondScreen widget.
                 '/second': (context) => const Journey(),
-                '/job': (_) => ListingScreen(),
-                '/application': (_) => ApplicationsListingScreen(),
                 // '/quiz': (_) => WizardForm(),
                 '/timer': (_) => CountdownPage(),
                 '/landing': (_) => CountdownPage(),
+
+                '/job': (_) => ListingScreen(
+                    mode: 'job', title: 'Jobs', pushRouteName: '/application'),
+                // '/application': (_) => ApplicationsListingScreen(),
+                '/application': (_) => ListingScreen(
+                    mode: 'application',
+                    popRouteName: '/job',
+                    title: 'Application'),
+
                 '/calling_page': (_) => ListingScreen(
-                    mode: 'company_role', pushRouteName: '/candidates_page'),
+                    mode: 'company_role',
+                    pushRouteName: '/candidates_page',
+                    title: 'Calling Page'),
                 '/client_page': (_) => ListingScreen(
-                    mode: 'company_role', pushRouteName: '/candidates_page'),
+                    mode: 'company_role',
+                    pushRouteName: '/candidates_page',
+                    title: 'Client Page'),
                 '/candidates_page': (_) => ListingScreen(
-                      mode: 'candidate',
-                    ),
+                    mode: 'candidate',
+                    title: 'Candidates Page',
+                    popRouteName: '/admins'),
               },
 
               theme: ThemeData(

@@ -8,9 +8,15 @@ import '../store/dash_store.dart';
 class ListingScreen extends StatefulWidget {
   final String mode;
   final String pushRouteName;
+  final String popRouteName;
+  final String title;
 
   ListingScreen(
-      {Key? key, this.mode = 'job', this.pushRouteName = '/application'})
+      {Key? key,
+      this.mode = 'job',
+      this.pushRouteName = '',
+      this.popRouteName = '',
+      this.title = ''})
       : super(key: key);
 
   @override
@@ -26,25 +32,35 @@ class _JobsListingScreenState extends State<ListingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Jobs'),
+        leading: widget.popRouteName != ''
+            ? IconButton(
+                icon: Icon(Icons.arrow_back, color: Colors.black),
+                onPressed: () => Navigator.pushNamedAndRemoveUntil(
+                    context, widget.popRouteName, (route) => false),
+              )
+            : null,
+        title: Text(widget.title),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
             ListingUiStoreWizard(
-              mode: widget.mode,
-              pushRouteName: widget.pushRouteName,
-              getCallbackStore: () {
-                return Provider.of<DashStore>(context, listen: false);
-              },
+                mode: widget.mode,
+                pushRouteName: widget.pushRouteName,
+                getCallbackStore: () {
+                  return Provider.of<DashStore>(context, listen: false);
+                },
 
-              /// Write comment
-              dependencyState: widget.mode == "candidate"
-                  ? Provider.of<DashStore>(context, listen: false)
-                      .companyRoleSelected
-                  : null,
-              // Provider.of<DashStore>(context, listen: false)
-            ),
+                /// Dependent state (selected item) from orevious step
+                dependencyState: widget.mode == "candidate"
+                    ? Provider.of<DashStore>(context, listen: false)
+                        .companyRoleSelected
+                    : widget.mode == 'application'
+                        ? Provider.of<DashStore>(context, listen: false)
+                            .jobSelected
+                        : null
+                // Provider.of<DashStore>(context, listen: false)
+                ),
             // const Text(
             //   'JobsStore value in example/main initial',
             // ),
