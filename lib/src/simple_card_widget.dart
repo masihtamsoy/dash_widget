@@ -6,9 +6,11 @@ class SimpleCardWidget extends StatelessWidget {
   final String answers;
   final String onboarding;
   final String totalScore;
+  final VoidCallback? onPressed;
 
   const SimpleCardWidget(
       {Key? key,
+      this.onPressed,
       this.title = "",
       this.subtitle = "",
       this.answers = "",
@@ -37,7 +39,17 @@ class SimpleCardWidget extends StatelessWidget {
                   const SizedBox(height: 10),
                   Text(answers),
                   const SizedBox(height: 10),
-                  Text(onboarding)
+                  Text(onboarding),
+
+                  /// Add condition
+                  MaterialButton(
+                    color: Theme.of(context).primaryColor,
+                    onPressed: onPressed,
+                    child: const Text(
+                      'Click',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
                 ],
               ),
             ],

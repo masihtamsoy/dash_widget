@@ -32,6 +32,7 @@ class ListingUiStoreWizard extends StatefulWidget {
 class _StoreWidgetWrapperState extends State<ListingUiStoreWizard> {
   late ListingStore _listingStore;
 
+  /// Make call to Mobx listing function based on widget.mode
   Future<dynamic> _listingWidget() {
     print("-------listing widget mode----------${widget.mode}");
     // Loop over _listingStore.jobList(mobile, company_code)
@@ -43,9 +44,16 @@ class _StoreWidgetWrapperState extends State<ListingUiStoreWizard> {
         int jobId = widget.dependencyState!['id'];
         myListing = _listingStore.getApplicationListing(jobId);
         break;
+      case "candidate":
+        int companyRoleId = widget.dependencyState!['id'];
+        myListing = _listingStore.getCandidateListing(companyRoleId);
+        break;
       case "job":
         myListing = _listingStore.getAllJobs();
         // myListing = _listingStore.getJobListing("8011230914", "DASH_20");
+        break;
+      case "company_role":
+        myListing = _listingStore.getAllCompanyRole();
         break;
       default:
         print("------unknown mode-------- ${widget.mode}");
@@ -74,19 +82,55 @@ class _StoreWidgetWrapperState extends State<ListingUiStoreWizard> {
         widget.getCallbackStore!()
             .applicationSelected(_listingStore.getItem(index));
         break;
+      case "company_role":
+        widget.getCallbackStore!()
+            .selectCompanyRole(_listingStore.getItem(index));
+        break;
       default:
     }
   }
 
+  /// buildPresentation wrt widget.mode, parse data and feed to card
   Widget _buildPresentation(int index) {
     switch (widget.mode) {
       case "job":
         return _buildJobPresentation(index);
+      case "candidate":
+        return _buildCandidatePresentation(index);
       case "application":
         return _buildApplicantPresentation(index);
+      case "company_role":
+        return _buildCompanyRolePresentation(index);
       default:
         return Text("No widget");
     }
+  }
+
+  Widget _buildCandidatePresentation(int index) {
+    String fullname = _listingStore.getItem(index)["candidates"]["name"];
+    String totalScore =
+        _listingStore.getItem(index)["candidates"]["mobile"].toString();
+    return SimpleCardWidget(
+      subtitle: fullname,
+      totalScore: totalScore,
+    );
+  }
+
+  Widget _buildCompanyRolePresentation(int index) {
+    String fullname = _listingStore.getItem(index)["company"]["name"];
+    String totalScore = _listingStore.getItem(index)["role"]["name"];
+    return SimpleCardWidget(
+      subtitle: fullname,
+      totalScore: totalScore,
+      onPressed: () {
+        _onPressed(index);
+
+        // INFO: on push without Remove util, on back parent widget not gets build
+        // Use pushNamedAndRemoveUntil
+        Navigator.pushNamedAndRemoveUntil(
+            context, widget.pushRouteName, (route) => false);
+      },
+    );
   }
 
   Widget _buildApplicantPresentation(int index) {

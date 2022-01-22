@@ -11,10 +11,19 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_svg: ^0.23.0+1
+
+  # maintain app global state
   mobx: ^2.0.0
   flutter_mobx: ^2.0.0
   provider: ^6.0.1
+
+  # API data client
   supabase_flutter: ^0.2.9
+
+  # Forms: implementation of quiz journey for companies
+  # flutter_form_bloc:
+  #   path: ../form_bloc/packages/flutter_form_bloc
+  flutter_countdown_timer: ^4.1.0
 
 dev_dependencies:
   flutter_test:
