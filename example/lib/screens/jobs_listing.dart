@@ -64,9 +64,9 @@ class _JobsListingScreenState extends State<ListingScreen> {
             // const Text(
             //   'JobsStore value in example/main initial',
             // ),
-            Text(
-              '${Provider.of<ListingStore>(context, listen: false).data}',
-            ),
+            // Text(
+            //   '${Provider.of<ListingStore>(context, listen: false).data}',
+            // ),
             // Observer(
             //     builder: (_) => Text(
             //           '${Provider.of<JobsStore>(context, listen: false).data} dynamic Jobs store value in example/main',
