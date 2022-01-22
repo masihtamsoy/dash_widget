@@ -21,11 +21,14 @@ class _AdminListingState extends State<AdminListing> {
       child: Column(
         children: [
           RoundedButtonWidget(
-              buttonText: "Dashhire Portal", onPressed: _onPressed),
+              buttonText: "Dashhire Portal",
+              onPressed: () => Navigator.pushNamed(context, '/job')),
           RoundedButtonWidget(
-              buttonText: "Calling Sheet", onPressed: _onPressed),
+              buttonText: "Calling Sheet",
+              onPressed: () => Navigator.pushNamed(context, '/calling_page')),
           RoundedButtonWidget(
-              buttonText: "Client Sheet", onPressed: _onPressed),
+              buttonText: "Client Sheet",
+              onPressed: () => Navigator.pushNamed(context, '/client_page')),
         ],
       ),
     );

@@ -90,7 +90,7 @@ abstract class _ListingStore with Store {
   @action
   Future getAllJobs() async {
     final client = supa.SupabaseClient(
-        SupaConstants.supabaseUrl, SupaConstants.supabaseKey);
+        SupaConstants.supabaseUrlStage, SupaConstants.supabaseKeyStage);
 
     final response = await client.from('jobs').select('*').execute();
 
@@ -106,7 +106,7 @@ abstract class _ListingStore with Store {
   @action
   Future getApplicationListing(int jobId) async {
     final client = supa.SupabaseClient(
-        SupaConstants.supabaseUrl, SupaConstants.supabaseKey);
+        SupaConstants.supabaseUrlStage, SupaConstants.supabaseKeyStage);
 
     // final selectResponse = await client.from("jobs").select("*").execute();
 
